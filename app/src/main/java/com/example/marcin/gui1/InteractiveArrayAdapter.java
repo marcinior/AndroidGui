@@ -39,11 +39,8 @@ public class InteractiveArrayAdapter extends ArrayAdapter<MarkModel> {
             markGroup.setOnCheckedChangeListener(
                     new RadioGroup.OnCheckedChangeListener() {
                         @Override
-                        public void onCheckedChanged(
-                                RadioGroup group,
-                                int checkButtonId) {
-                            updateMarkModel(group,
-                                    checkButtonId);
+                        public void onCheckedChanged(RadioGroup group, int checkButtonId) {
+                            updateMarkModel(group, checkButtonId);
                         }
                     });
 

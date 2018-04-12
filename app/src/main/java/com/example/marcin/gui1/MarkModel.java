@@ -1,10 +1,12 @@
 package com.example.marcin.gui1;
 
+import java.io.Serializable;
+
 /**
  * Created by marcin on 22.03.18.
  */
 
-public class MarkModel {
+public class MarkModel implements Serializable {
     private String name;
     private int mark;
 

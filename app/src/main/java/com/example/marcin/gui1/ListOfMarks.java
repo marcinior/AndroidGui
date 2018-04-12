@@ -3,15 +3,21 @@ package com.example.marcin.gui1;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.RadioGroup;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class ListOfMarks extends AppCompatActivity {
+
+    ArrayList<MarkModel> listOfMarks;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +26,19 @@ public class ListOfMarks extends AppCompatActivity {
 
         Bundle container = getIntent().getExtras();
         int count = container.getInt("countOfMarks");
-        ArrayList<MarkModel> listOfMarks = new ArrayList<MarkModel>();
-        ListView listView = (ListView) findViewById(R.id.list);
+        listOfMarks = new ArrayList<MarkModel>();
+        listView = (ListView) findViewById(R.id.list);
 
-        for (int i = 0; i < count; i++) {
-            listOfMarks.add(new MarkModel(SubjectName.values()[i].toString()));
+        Log.d("moj_test1", "" + count);
+
+
+        if (savedInstanceState == null) {
+            for (int i = 0; i < count; i++) {
+                listOfMarks.add(new MarkModel(SubjectName.values()[i].toString()));
+            }
+        } else {
+            listOfMarks = (ArrayList<MarkModel>) savedInstanceState.getSerializable("marksList");
         }
-
         InteractiveArrayAdapter adapter = new InteractiveArrayAdapter(this, listOfMarks);
         listView.setAdapter(adapter);
 
@@ -60,6 +72,12 @@ public class ListOfMarks extends AppCompatActivity {
         Muzyka,
         Informatyka,
         Religia,
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable("marksList", listOfMarks);
+        super.onSaveInstanceState(outState);
     }
 }
 
