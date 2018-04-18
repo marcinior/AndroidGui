@@ -22,9 +22,14 @@ public class UserData extends AppCompatActivity {
     boolean checkTheCorrectness(EditText view, String message) {
         if (view.getText().toString().isEmpty()) {
             findViewById(R.id.buttonMarks).setVisibility(View.INVISIBLE);
-            Toast.makeText(UserData.this, "Uzupełnij pole: " + message, Toast.LENGTH_LONG).show();
+            Toast.makeText(UserData.this, "Uzupełnij pole : " + message, Toast.LENGTH_LONG).show();
             return false;
-        } else return true;
+        } else if (!view.getText().toString().matches("[A-Z]{1}[a-ząćżźśółęń]{2,}")) {
+            findViewById(R.id.buttonMarks).setVisibility(View.INVISIBLE);
+            Toast.makeText(UserData.this, message + " musi zaczynać się z dużej litery i nie może zawierać cyfr i znaków specjalnych", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -59,10 +64,10 @@ public class UserData extends AppCompatActivity {
                 if (!view.hasFocus()) {
 
                     if (view.getId() == name.getId()) {
-                        nameFlag = checkTheCorrectness(name, "imie");
+                        nameFlag = checkTheCorrectness(name, "Imie");
                     } else {
                         if (view.getId() == surname.getId()) {
-                            surnameFlag = checkTheCorrectness(surname, "nazwisko");
+                            surnameFlag = checkTheCorrectness(surname, "Nazwisko");
                         } else {
                             countFlag = checkTheCorrectness(countOfMarks, "liczba ocen");
                         }
@@ -127,7 +132,7 @@ public class UserData extends AppCompatActivity {
             ((EditText) findViewById(R.id.countOfMarks)).setEnabled(false);
             ((TextView) findViewById(R.id.averageLabel)).setText("Twoja średnia to: " + average);
 
-            if (average > 3) {
+            if (average >= 3) {
                 successButton.setVisibility(Button.VISIBLE);
             } else {
                 failButton.setVisibility(Button.VISIBLE);
@@ -136,7 +141,7 @@ public class UserData extends AppCompatActivity {
             successButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(UserData.this, "Gratulacje! Otrzymujesz zaliczanie", Toast.LENGTH_LONG).show();
+                    Toast.makeText(UserData.this, "Gratulacje! Otrzymujesz zaliczenie", Toast.LENGTH_LONG).show();
                     finish();
                 }
             });

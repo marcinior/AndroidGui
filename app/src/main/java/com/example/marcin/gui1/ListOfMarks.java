@@ -29,9 +29,6 @@ public class ListOfMarks extends AppCompatActivity {
         listOfMarks = new ArrayList<MarkModel>();
         listView = (ListView) findViewById(R.id.list);
 
-        Log.d("moj_test1", "" + count);
-
-
         if (savedInstanceState == null) {
             for (int i = 0; i < count; i++) {
                 listOfMarks.add(new MarkModel(SubjectName.values()[i].toString()));
