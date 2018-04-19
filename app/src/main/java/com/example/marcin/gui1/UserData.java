@@ -24,7 +24,7 @@ public class UserData extends AppCompatActivity {
             findViewById(R.id.buttonMarks).setVisibility(View.INVISIBLE);
             Toast.makeText(UserData.this, "Uzupełnij pole : " + message, Toast.LENGTH_LONG).show();
             return false;
-        } else if (!view.getText().toString().matches("[A-Z]{1}[a-ząćżźśółęń]{2,}")) {
+        } else if (!view.getText().toString().matches("[A-Z]{1}[a-ząćżźśółęń]{2,}") && message != "Liczba ocen" ) {
             findViewById(R.id.buttonMarks).setVisibility(View.INVISIBLE);
             Toast.makeText(UserData.this, message + " musi zaczynać się z dużej litery i nie może zawierać cyfr i znaków specjalnych", Toast.LENGTH_LONG).show();
             return false;
@@ -69,7 +69,7 @@ public class UserData extends AppCompatActivity {
                         if (view.getId() == surname.getId()) {
                             surnameFlag = checkTheCorrectness(surname, "Nazwisko");
                         } else {
-                            countFlag = checkTheCorrectness(countOfMarks, "liczba ocen");
+                            countFlag = checkTheCorrectness(countOfMarks, "Liczba ocen");
                         }
                     }
 
